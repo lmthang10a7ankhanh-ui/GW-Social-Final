@@ -1,17 +1,33 @@
 import * as yup from 'yup'
-export const postSchema = yup.object({
-  title: yup
-    .string()
-    .trim()
-    .required('Nhập tiêu đề bài viết.')
-    .max(120, 'Tiêu đề tối đa 120 ký tự.'),
-  content: yup
-    .string()
-    .trim()
-    .required('Nhập nội dung bài viết.')
-    .max(2000, 'Nội dung tối đa 2.000 ký tự.'),
-  published: yup
-    .boolean()
-    .typeError('Chọn trạng thái xuất bản.')
-    .defined('Chọn trạng thái xuất bản.'),
-})
+
+export const postSchema = yup
+  .object({
+    cnName: yup
+      .string()
+      .trim()
+      .required('Vui lòng nhập tên kênh.')
+      .max(120, 'Tên kênh tối đa 120 ký tự.'),
+    cnUrl: yup
+      .string()
+      .trim()
+      .required('Vui lòng nhập đường dẫn URL.')
+      .max(500, 'Đường dẫn tối đa 500 ký tự.'),
+    cnIcon: yup
+      .string()
+      .transform((value) => (value === null ? '' : value))
+      .optional(),
+    cnStyle: yup
+      .string()
+      .transform((value) => (value === null ? '' : value))
+      .optional(),
+    cnOrder: yup
+      .number()
+      .typeError('Thứ tự phải là số.')
+      .transform((value) => (isNaN(value) ? 0 : value))
+      .optional(),
+    isActived: yup
+      .number()
+      .transform((value) => (isNaN(value) ? 1 : value))
+      .optional(),
+  })
+  .required()

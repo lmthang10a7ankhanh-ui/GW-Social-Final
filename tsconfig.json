@@ -13,6 +13,7 @@
     "resolveJsonModule": true,
     "types": ["vite/client", "vitest/globals"],
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": { "@/*": ["./src/*"] }
   },
   "include": ["src", "vite.config.ts"]
